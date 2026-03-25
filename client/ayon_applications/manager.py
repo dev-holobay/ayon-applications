@@ -796,7 +796,9 @@ class ApplicationLaunchContext:
             self.executable = ApplicationExecutable(executable_path)
             self.log.debug(f"full path to rez executable is {executable_path}")
             # this is actually used to launch an application
-            self.launch_args.insert(0, executable_path)
+            if not executable_path in self.launch_args:
+                # we might have a rez package but the path is still coming from ayon
+                self.launch_args.insert(0, executable_path)
 
         # Prepare subprocess args
         args_len_str = ""
