@@ -184,6 +184,10 @@ class ApplicationManager:
             if executable:
                 output = variant
                 break
+            else:
+                if "AYON_REZ_PACKAGES" in variant.environment:
+                    output = variant
+                    break
         return output
 
     def create_launch_context(
